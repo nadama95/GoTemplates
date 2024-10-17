@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"io"
 	"log"
+	"os"
 )
 
 type base struct {
@@ -33,6 +34,7 @@ func (c base) New() Component {
 }
 
 func (c base) Execute(wr io.Writer) {
+	fmt.Println(os.Getwd())
 	filename := fmt.Sprintf("templates/%s.html", c.template)
 	tmpl, err := template.ParseFiles(filename)
 
