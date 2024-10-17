@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 type base struct {
@@ -34,8 +35,9 @@ func (c base) New() Component {
 }
 
 func (c base) Execute(wr io.Writer) {
-	fmt.Println(os.Getwd())
-	filename := fmt.Sprintf("templates/%s.html", c.template)
+	log.Fatalln(os.Getwd())
+
+	filename := filepath.Join("templates", fmt.Sprintf("%s.html", c.template))
 	tmpl, err := template.ParseFiles(filename)
 
 	if err != nil {
