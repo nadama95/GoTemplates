@@ -2,13 +2,15 @@ package components
 
 import (
 	"bytes"
+	"embed"
 	"fmt"
 	"html/template"
 	"io"
 	"log"
-	"os"
-	"path/filepath"
 )
+
+//go:embed templates/*.html
+var templateFS embed.FS
 
 type base struct {
 	template string
@@ -35,20 +37,14 @@ func (c base) New() Component {
 }
 
 func (c base) Execute(wr io.Writer) {
-	folder, err := filepath.Abs(filepath.Dir(os.Args[0]))
+
+	tmpls, err := template.ParseFS(templateFS, "templates/*.html")
 
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to load template: %s", err)
 	}
 
-	filename := filepath.Join(folder, "templates", fmt.Sprintf("%s.html", c.template))
-	tmpl, err := template.ParseFiles(filename)
-
-	if err != nil {
-		log.Fatalf("Failed to load template: %s, with folder path %s", err, folder)
-	}
-
-	err = tmpl.Execute(wr, templateData{
+	err = tmpls.ExecuteTemplate(wr, c.template, templateData{
 		Attrs:    c.HTMLAttrs.convert(),
 		Children: c.Children.convert(),
 		Text:     c.Text,
