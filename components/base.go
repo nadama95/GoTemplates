@@ -35,13 +35,17 @@ func (c base) New() Component {
 }
 
 func (c base) Execute(wr io.Writer) {
-	log.Fatalln(os.Getwd())
+	folder, err := filepath.Abs(filepath.Dir(os.Args[0]))
 
-	filename := filepath.Join("templates", fmt.Sprintf("%s.html", c.template))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	filename := filepath.Join(folder, "templates", fmt.Sprintf("%s.html", c.template))
 	tmpl, err := template.ParseFiles(filename)
 
 	if err != nil {
-		log.Fatal("Failed to load template: ", err)
+		log.Fatalf("Failed to load template: %s, with folder path %s", err, folder)
 	}
 
 	err = tmpl.Execute(wr, templateData{
