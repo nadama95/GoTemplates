@@ -33,7 +33,7 @@ func (c base) New() Component {
 }
 
 func (c base) Execute(wr io.Writer) {
-	filename := fmt.Sprintf("./templates/%s.html", c.template)
+	filename := fmt.Sprintf("templates/%s.html", c.template)
 	tmpl, err := template.ParseFiles(filename)
 
 	if err != nil {
