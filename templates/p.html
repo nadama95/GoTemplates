@@ -1,0 +1,5 @@
+<p{{ range $a := .Attrs }} {{ $a }}{{ end }}>
+{{- range $c := .Children }} 
+    {{ $c }} 
+{{ end -}}
+</p>
