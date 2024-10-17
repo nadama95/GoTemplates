@@ -44,7 +44,7 @@ func (c base) Execute(wr io.Writer) {
 		log.Fatalf("Failed to load template: %s", err)
 	}
 
-	err = tmpls.ExecuteTemplate(wr, c.template, templateData{
+	err = tmpls.ExecuteTemplate(wr, fmt.Sprintf("%s.html", c.template), templateData{
 		Attrs:    c.HTMLAttrs.convert(),
 		Children: c.Children.convert(),
 		Text:     c.Text,
