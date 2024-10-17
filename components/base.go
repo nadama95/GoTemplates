@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 )
 
@@ -31,7 +32,7 @@ func (c base) New() Component {
 	return base{HTMLAttrs: attrs}
 }
 
-func (c base) Render() template.HTML {
+func (c base) Execute(wr io.Writer) {
 	filename := fmt.Sprintf("./templates/%s.html", c.template)
 	tmpl, err := template.ParseFiles(filename)
 
@@ -39,9 +40,7 @@ func (c base) Render() template.HTML {
 		log.Fatal("Failed to load template: ", err)
 	}
 
-	buf := new(bytes.Buffer)
-
-	err = tmpl.Execute(buf, templateData{
+	err = tmpl.Execute(wr, templateData{
 		Attrs:    c.HTMLAttrs.convert(),
 		Children: c.Children.convert(),
 		Text:     c.Text,
@@ -50,6 +49,11 @@ func (c base) Render() template.HTML {
 	if err != nil {
 		log.Fatal("Failed to execute template: ", err)
 	}
+}
+
+func (c base) Render() template.HTML {
+	buf := new(bytes.Buffer)
+	c.Execute(buf)
 
 	return template.HTML(buf.String())
 }
@@ -103,6 +107,7 @@ func (a HTMLAttrs) convert() []template.HTMLAttr {
 type Component interface {
 	AddClass(string) Component
 	AddChild(Component) Component
+	Execute(io.Writer)
 	New() Component
 	Render() template.HTML
 	SetAttr(string, string) Component
