@@ -123,6 +123,7 @@ func NewComponent(component string) Component {
 	componentList := map[string]Component{
 		"button": Button{},
 		"div":    Div{},
+		"p":      P{},
 	}
 
 	c, ok := componentList[component]
