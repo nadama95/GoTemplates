@@ -121,10 +121,13 @@ type Component interface {
 
 func NewComponent(component string) Component {
 	componentList := map[string]Component{
+		"a":      A{},
 		"button": Button{},
 		"div":    Div{},
 		"h2":     H2{},
+		"li":     LI{},
 		"p":      P{},
+		"ul":     UL{},
 	}
 
 	c, ok := componentList[component]

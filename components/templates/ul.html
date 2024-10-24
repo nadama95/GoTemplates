@@ -1,0 +1,6 @@
+<ul{{ range $a := .Attrs }} {{ $a }}{{ end }}>
+{{- range $c := .Children }} 
+    {{ $c }} 
+{{ end -}}
+{{ if .Text }}{{- .Text -}}{{ end -}}
+</ul>
