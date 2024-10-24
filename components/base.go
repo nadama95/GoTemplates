@@ -20,7 +20,7 @@ type base struct {
 }
 
 func (c base) AddClass(class string) Component {
-	c.HTMLAttrs["class"] += class
+	c.HTMLAttrs["class"] += fmt.Sprintf(" %s", class)
 	return c
 }
 
