@@ -10,3 +10,7 @@ func (c Button) New() Component {
 	}
 	return Button{base: base{template: "button", HTMLAttrs: attrs}}
 }
+
+func NewBtn() Component {
+	return NewComponent("button")
+}

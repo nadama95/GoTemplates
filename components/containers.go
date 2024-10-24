@@ -11,6 +11,10 @@ func (c Div) New() Component {
 	return Div{base: base{template: "div", HTMLAttrs: attrs}}
 }
 
+func NewDiv() Component {
+	return NewComponent("div")
+}
+
 type P struct {
 	base
 }
@@ -20,4 +24,8 @@ func (c P) New() Component {
 		"class": "",
 	}
 	return P{base: base{template: "p", HTMLAttrs: attrs}}
+}
+
+func NewP() Component {
+	return NewComponent("p")
 }
