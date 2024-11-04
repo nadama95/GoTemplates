@@ -8,7 +8,7 @@ func (c LI) New() Component {
 	attrs := map[string]string{
 		"class": "",
 	}
-	return UL{base: base{template: "li", HTMLAttrs: attrs}}
+	return LI{base: base{template: "li", HTMLAttrs: attrs}}
 }
 
 func NewLI() Component {

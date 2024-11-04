@@ -29,7 +29,6 @@ func (c base) AddClass(class string) Component {
 
 	for _, c := range classes {
 		ClassList = append(ClassList, c)
-		fmt.Println(c)
 	}
 
 	c.HTMLAttrs["class"] += fmt.Sprintf(" %s", class)
