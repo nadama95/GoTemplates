@@ -60,6 +60,18 @@ func (c TD) New() Component {
 	return TD{base: base{template: "td", HTMLAttrs: attrs}}
 }
 
+type TH struct {
+	base
+}
+
+func (c TH) New() Component {
+	attrs := map[string]string{
+		"class": "",
+	}
+
+	return TH{base: base{template: "th", HTMLAttrs: attrs}}
+}
+
 type TR struct {
 	base
 }
