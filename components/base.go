@@ -138,6 +138,11 @@ func NewComponent(component string) Component {
 		"h2":     H2{},
 		"li":     LI{},
 		"p":      P{},
+		"table":  Table{},
+		"tbody":  Tbody{},
+		"td":     TD{},
+		"thead":  Thead{},
+		"tr":     TR{},
 		"ul":     UL{},
 	}
 
