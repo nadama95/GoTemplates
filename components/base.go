@@ -7,10 +7,15 @@ import (
 	"html/template"
 	"io"
 	"log"
+	"strings"
 )
 
 //go:embed templates/*.html
 var templateFS embed.FS
+
+type ClassListType []string
+
+var ClassList ClassListType
 
 type base struct {
 	template string
@@ -20,6 +25,13 @@ type base struct {
 }
 
 func (c base) AddClass(class string) Component {
+	classes := strings.Split(class, " ")
+
+	for _, c := range classes {
+		ClassList = append(ClassList, c)
+		fmt.Println(c)
+	}
+
 	c.HTMLAttrs["class"] += fmt.Sprintf(" %s", class)
 	return c
 }
