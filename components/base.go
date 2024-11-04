@@ -141,6 +141,7 @@ func NewComponent(component string) Component {
 		"table":  Table{},
 		"tbody":  Tbody{},
 		"td":     TD{},
+		"th":     TH{},
 		"thead":  Thead{},
 		"tr":     TR{},
 		"ul":     UL{},
