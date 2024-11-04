@@ -1,12 +1,14 @@
 package components
 
+import "strings"
+
 type Button struct {
 	base
 }
 
 func (c Button) New() Component {
 	attrs := map[string]string{
-		"class": "",
+		"class": strings.Join(theme.Button, " "),
 	}
 	return Button{base: base{template: "button", HTMLAttrs: attrs}}
 }

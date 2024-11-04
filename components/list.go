@@ -1,12 +1,14 @@
 package components
 
+import "strings"
+
 type LI struct {
 	base
 }
 
 func (c LI) New() Component {
 	attrs := map[string]string{
-		"class": "",
+		"class": strings.Join(theme.LI, " "),
 	}
 	return LI{base: base{template: "li", HTMLAttrs: attrs}}
 }
@@ -21,7 +23,7 @@ type UL struct {
 
 func (c UL) New() Component {
 	attrs := map[string]string{
-		"class": "",
+		"class": strings.Join(theme.UL, " "),
 	}
 	return UL{base: base{template: "ul", HTMLAttrs: attrs}}
 }

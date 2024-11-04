@@ -7,11 +7,48 @@ import (
 	"html/template"
 	"io"
 	"log"
+	"os"
 	"strings"
+
+	"gopkg.in/yaml.v3"
 )
 
 //go:embed templates/*.html
 var templateFS embed.FS
+
+type themeMap struct {
+	A      []string `yaml:"a"`
+	Button []string `yaml:"button"`
+	Div    []string `yaml:"div"`
+	H2     []string `yaml:"h2"`
+	LI     []string `yaml:"li"`
+	P      []string `yaml:"p"`
+	Table  []string `yaml:"table"`
+	Tbody  []string `yaml:"tbody"`
+	TD     []string `yaml:"td"`
+	TH     []string `yaml:"th"`
+	Thead  []string `yaml:"thead"`
+	TR     []string `yaml:"tr"`
+	UL     []string `yaml:"ul"`
+}
+
+var theme *themeMap = &themeMap{}
+
+func init() {
+	mapFile, err := os.ReadFile("theme.yaml")
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	err = yaml.Unmarshal(mapFile, &theme)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+}
 
 type ClassListType []string
 
